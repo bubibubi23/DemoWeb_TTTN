@@ -94,23 +94,23 @@
                             <div class="mainmenu pull-left">
                                 <ul class="nav navbar-nav collapse navbar-collapse">
                                     <li><a href="index.html" class="active">Trang Chủ</a></li>
-                                    <li class="dropdown"><a href="#">Đàn Guitar Acoustic<i class="fa fa-angle-down"></i></a>
+                                    <li class="dropdown"><a href="HienThiSanPham?command=Loai&LoaiSP=Acoustic">Đàn Guitar Acoustic<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
                                             <%
                                                 for(NhomSanPham nhomsp : nhomSPDAO.getListGuitar()){
                                             %>
 
-                                            <li><a href="shop.html"><%=nhomsp.getTenNhomSP()%></a></li>
+                                            <li><a href="HienThiSanPham?command=LoaiMaNhom&MaNhomSP=<%=nhomsp.getMaNhomSP()%>&LoaiSP=Acoustic"><%=nhomsp.getTenNhomSP()%></a></li>
                                             <%}%>
                                             
                                         </ul>
                                     </li> 
-                                    <li class="dropdown"><a href="#">Đàn Guitar Classic<i class="fa fa-angle-down"></i></a>
+                                    <li class="dropdown"><a href="HienThiSanPham?command=Loai&LoaiSP=Classic">Đàn Guitar Classic<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
                                             <%
                                                 for(NhomSanPham nhomsp1 : nhomSPDAO.getListGuitar()){
                                             %>
-                                            <li><a href="blog.html"><%=nhomsp1.getTenNhomSP()%></a></li>
+                                            <li><a href="HienThiSanPham?command=LoaiMaNhom&MaNhomSP=<%=nhomsp1.getMaNhomSP()%>&LoaiSP=Classic"><%=nhomsp1.getTenNhomSP()%></a></li>
                                             <%}%>
                                         </ul>
                                     </li> 

@@ -6,11 +6,10 @@
 
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.Locale"%>
-<%@page import="java.text.DecimalFormat"%>
 <%@page import="Model.SanPham"%>
 <%@page import="DAO.SanPhamDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -32,6 +31,7 @@
             Locale localeVN = new Locale("vi", "VN");
             NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
         %>
+     
         <section>
             <div class="container">
                 <div class="row">
@@ -41,11 +41,11 @@
                                 <h2>Thương Hiệu</h2>
                                 <div class="brands-name">
                                     <ul class="nav nav-pills nav-stacked">
-                                        <li><a href="#"> <span class="pull-right">(50)</span>Epiphone</a></li>
-                                        <li><a href="#"> <span class="pull-right">(56)</span>Ibanez</a></li>
-                                        <li><a href="#"> <span class="pull-right">(27)</span>Cort</a></li>
-                                        <li><a href="#"> <span class="pull-right">(32)</span>Yamaha</a></li>
-                                        <li><a href="#"> <span class="pull-right">(5)</span>Takamine</a></li>
+                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP001"> <span class="pull-right">(50)</span>Epiphone</a></li>
+                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP002"> <span class="pull-right">(56)</span>Ibanez</a></li>
+                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP003"> <span class="pull-right">(27)</span>Cort</a></li>
+                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP004"> <span class="pull-right">(32)</span>Yamaha</a></li>
+                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP005"> <span class="pull-right">(5)</span>Takamine</a></li>
                                     </ul>
                                 </div>
                             </div><!--/brands_products-->
@@ -68,9 +68,9 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <a href="#"><img src="<%=sanpham.getHinhAnh()%>" alt="" /></a>
+                                            <a href="product details.jsp?MaSP=<%=sanpham.getMaSP() %>"><img src="<%=sanpham.getHinhAnh()%>" alt="" /></a>
                                             <h2><%=currencyVN.format(sanpham.getGia())%></h2>
-                                            <a href="#" ><p><%=sanpham.getTenSP()%></p></a>
+                                            <a href="product details.jsp?MaSP=<%=sanpham.getMaSP() %>" ><p><%=sanpham.getTenSP()%></p></a>
                                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>  
                                     </div>
@@ -97,9 +97,9 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <img src="<%=sanphamE.getHinhAnh()%>" alt="" />
+                                                    <a href="product details.jsp?MaSP=<%=sanphamE.getMaSP() %>"><img src="<%=sanphamE.getHinhAnh()%>" alt="" /></a>
                                                     <h2><%=currencyVN.format(sanphamE.getGia())%></h2>
-                                                    <p><%=sanphamE.getTenSP()%></p>
+                                                    <a href="product details.jsp?MaSP=<%=sanphamE.getMaSP() %>"><p><%=sanphamE.getTenSP()%></p></a>
                                                     <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                 </div>
                                             </div>
@@ -113,9 +113,9 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <img src="<%=sanphamI.getHinhAnh()%>" alt="" />
+                                                    <a href="product details.jsp?MaSP=<%=sanphamI.getMaSP() %>"><img src="<%=sanphamI.getHinhAnh()%>" alt="" /></a>
                                                     <h2><%=currencyVN.format(sanphamI.getGia())%></h2>
-                                                    <p><%=sanphamI.getTenSP() %></p>
+                                                    <a href="product details.jsp?MaSP=<%=sanphamI.getMaSP() %>"><p><%=sanphamI.getTenSP() %></p></a>
                                                     <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                 </div>
                                             </div>
@@ -129,9 +129,9 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <img src="<%=sanphamT.getHinhAnh() %>" alt="" />
+                                                    <a href="product details.jsp?MaSP=<%=sanphamT.getMaSP() %>"><img src="<%=sanphamT.getHinhAnh() %>" alt="" /></a>
                                                     <h2><%=currencyVN.format(sanphamT.getGia()) %></h2>
-                                                    <p><%=sanphamT.getTenSP() %></p>
+                                                    <a href="product details.jsp?MaSP=<%=sanphamT.getMaSP() %>"><p><%=sanphamT.getTenSP() %></p></a>
                                                     <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                 </div>
                                             </div>
@@ -145,9 +145,9 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <img src="<%=sanphamC.getHinhAnh() %>" alt="" />
+                                                    <a href="product details.jsp?MaSP=<%=sanphamC.getMaSP() %>"><img src="<%=sanphamC.getHinhAnh() %>" alt="" /></a>
                                                     <h2><%=currencyVN.format(sanphamC.getGia())%></h2>
-                                                    <p><%=sanphamC.getTenSP() %></p>
+                                                    <a href="product details.jsp?MaSP=<%=sanphamC.getMaSP() %>"><p><%=sanphamC.getTenSP() %></p></a>
                                                     <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                 </div>
                                             </div>
@@ -162,9 +162,9 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <img src="<%=sanphamY.getHinhAnh() %>" alt="" />
+                                                    <a href="product details.jsp?MaSP=<%=sanphamY.getMaSP() %>"><img src="<%=sanphamY.getHinhAnh() %>" alt="" /></a>
                                                     <h2><%=currencyVN.format(sanphamY.getGia())%></h2>
-                                                    <p><%=sanphamY.getTenSP() %></p>
+                                                    <a href="product details.jsp?MaSP=<%=sanphamY.getMaSP() %>"><p><%=sanphamY.getTenSP() %></p></a>
                                                     <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                 </div>
                                             </div>
@@ -186,9 +186,9 @@
                                             <div class="product-image-wrapper">
                                                 <div class="single-products">
                                                     <div class="productinfo text-center">
-                                                        <img src="<%=sanphamRand.getHinhAnh() %>" alt="" />
+                                                        <a href="product details.jsp?MaSP=<%=sanphamRand.getMaSP() %>"><img src="<%=sanphamRand.getHinhAnh() %>" alt="" /></a>
                                                         <h2><%=currencyVN.format(sanphamRand.getGia())%></h2>
-                                                        <p><%=sanphamRand.getTenSP() %></p>
+                                                        <a href="product details.jsp?MaSP=<%=sanphamRand.getMaSP() %>"><p><%=sanphamRand.getTenSP() %></p></a>
                                                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                     </div>
                                                 </div>
@@ -202,9 +202,9 @@
                                             <div class="product-image-wrapper">
                                                 <div class="single-products">
                                                     <div class="productinfo text-center">
-                                                        <img src="<%=sanphamRand.getHinhAnh() %>" alt="" />
+                                                        <a href="product details.jsp?MaSP=<%=sanphamRand.getMaSP() %>"><img src="<%=sanphamRand.getHinhAnh() %>" alt="" /></a>
                                                         <h2><%=currencyVN.format(sanphamRand.getGia())%></h2>                                                    
-                                                        <p><%=sanphamRand.getTenSP() %></p>
+                                                        <a href="product details.jsp?MaSP=<%=sanphamRand.getMaSP() %>"><p><%=sanphamRand.getTenSP() %></p></a>
                                                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                     </div>
                                                 </div>

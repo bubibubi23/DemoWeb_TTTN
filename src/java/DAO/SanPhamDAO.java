@@ -53,6 +53,39 @@ public class SanPhamDAO {
         }
         return list;
     }
+    //Lay danh sach tat ca san pham bang MaNhomSP
+    public ArrayList<SanPham> listSanPhamByMaNhomSP(String MaNhomSP){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT * FROM sanpham WHERE MaNhomSP = '"+MaNhomSP+"' AND TrangThai = '0'";
+        ArrayList<SanPham> list = new ArrayList<>(); 
+        
+        PreparedStatement ps;
+        try {
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                SanPham sanpham = new SanPham();
+                
+                sanpham.setMaSP(rs.getString("MaSP"));
+                sanpham.setTenSP(rs.getString("TenSP"));
+                sanpham.setMaNhomSP(rs.getString("MaNhomSP"));
+                sanpham.setGia(rs.getInt("Gia"));
+                sanpham.setHinhAnh(rs.getString("HinhAnh"));
+                sanpham.setMoTa(rs.getString("MoTa"));
+                sanpham.setMaTSSP(rs.getString("MaTSSP"));
+                sanpham.setNgayThem(rs.getDate("NgayThem"));
+                sanpham.setSoLuongTon(rs.getInt("SoLuongTon"));
+                sanpham.setSoLuongThem(rs.getInt("SoLuongNhap"));
+                sanpham.setTrangThai(rs.getInt("TrangThai"));
+                sanpham.setLoaiSP(rs.getString("LoaiSP"));
+                
+                list.add(sanpham);
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
     
     //Lay thong tin san pham bang MaSP
     public SanPham getSanPhamByMaSP(String MaSP){
@@ -87,7 +120,7 @@ public class SanPhamDAO {
     }
     
     //Lay danh sach san pham theo MaNhomSP va LoaiSP
-    public ArrayList<SanPham> listSanPhamByMaNhomSP(String MaNhomSP, String LoaiSP){
+    public ArrayList<SanPham> listSanPhamChiTiet(String MaNhomSP, String LoaiSP){
         Connection conn = DBConnect.getConnection();
         String sql = "SELECT * FROM sanpham WHERE MaNhomSP = '"+MaNhomSP+"' AND LoaiSP = '"+LoaiSP+"' AND TrangThai = '0'";
         ArrayList<SanPham> list = new ArrayList<>(); 
@@ -246,7 +279,7 @@ public class SanPhamDAO {
     //Lay danh sach tat ca dan guitar
     public ArrayList<SanPham> listSanPham(){
         Connection conn = DBConnect.getConnection();
-        String sql = "SELECT * FROM sanpham WHERE MaSP LIKE 'G%' AND TrangThai = '0'";
+        String sql = "SELECT * FROM sanpham WHERE MaNhomSP LIKE 'G%' AND TrangThai = '0'";
         ArrayList<SanPham> list = new ArrayList<>(); 
         
         PreparedStatement ps;
