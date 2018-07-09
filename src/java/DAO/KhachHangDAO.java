@@ -48,7 +48,7 @@ public class KhachHangDAO {
     //kiem tra dang nhap khach hang
     public KhachHang KiemTraDangNhapKhachHang(String Username, String Password){
         Connection conn = DBConnect.getConnection();
-        String sql = "SELECT * FROM khachhang WHERE Uswename = '"+Username+"' AND Password = '"+Password+"'";
+        String sql = "SELECT * FROM khachhang WHERE Username = '"+Username+"' AND Password = '"+Password+"'";
         
         KhachHang khachhang = new KhachHang();
         
@@ -56,6 +56,7 @@ public class KhachHangDAO {
             PreparedStatement ps = conn.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
             
+            while(rs.next()){
             khachhang.setMaKH(rs.getString("MaKH"));
             khachhang.setHoTen(rs.getString("HoTen"));
             khachhang.setDiaChi(rs.getString("DiaChi"));
@@ -67,8 +68,11 @@ public class KhachHangDAO {
             khachhang.setTrangThai(rs.getInt("TrangThai"));
             
             return khachhang;
+            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(KhachHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         return null;
     }

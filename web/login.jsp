@@ -20,36 +20,45 @@
         <link href="css/responsive.css" rel="stylesheet">
     </head>
     <body>
+        <%
+            String err = "";
+            if(request.getAttribute("err") != null){
+                err = (String) request.getAttribute("err");
+            }
+        %>
         <jsp:include page="header.jsp"></jsp:include>
 
             <section id="form"><!--form-->
                 <div class="container">
+                    
                     <div class="row">
-                        <div class="col-sm-4 col-sm-offset-1">
-                            <div class="login-form"><!--login form-->
-                                <h2>Login to your account</h2>
-                                <form action="#">
-                                    <input type="text" placeholder="Name" />
-                                    <input type="email" placeholder="Email Address" />
+                        <h3 style="color: red"><%=err%></h3>
+                        <div class="col-sm-4 col-sm-offset-1">                          
+                            <div class="login-form"><!--login form-->                             
+                                <h2>Đăng nhập tài khoản</h2>
+                                <form action="KhachHangDangNhap" method="post">
+                                    <input type="text" placeholder="Tên đăng nhập" required="" name="username" id="username"/>
+                                    <input type="password" placeholder="Mật khẩu" required="" name="pass"/>
                                     <span>
                                         <input type="checkbox" class="checkbox"> 
-                                        Keep me signed in
+                                        Lưu tài khoản
                                     </span>
-                                    <button type="submit" class="btn btn-default">Login</button>
+                                    <button type="submit" class="btn btn-default" value="Submit">Đăng nhập </button>
+                                    
                                 </form>
                             </div><!--/login form-->
                         </div>
                         <div class="col-sm-1">
-                            <h2 class="or">OR</h2>
+                            <h2 class="or">Hoặc</h2>
                         </div>
                         <div class="col-sm-4">
                             <div class="signup-form"><!--sign up form-->
-                                <h2>New User Signup!</h2>
+                                <h2>Đăng ký thành viên</h2>
                                 <form action="#">
-                                    <input type="text" placeholder="Name"/>
-                                    <input type="email" placeholder="Email Address"/>
-                                    <input type="password" placeholder="Password"/>
-                                    <button type="submit" class="btn btn-default">Signup</button>
+                                    <input type="text" placeholder="Tên tài khoản" name="username" required="" id="username"/>
+                                    <input type="email" placeholder="Địa chỉ Email" name="email" required=""/>
+                                    <input type="password" placeholder="Mật khẩu" name="pass" required=""/>
+                                    <button type="submit" class="btn btn-default " value="Đăng ký">Đăng ký</button>
                                 </form>
                             </div><!--/sign up form-->
                         </div>

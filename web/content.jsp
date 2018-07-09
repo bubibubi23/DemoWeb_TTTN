@@ -157,7 +157,7 @@
                                 </div>
 
                                 <div class="tab-pane fade" id="yamaha" >
-                                    <%for(SanPham sanphamY : sanphamDAO.list4GuitarByMaNhomSP("GNSP004")){%>
+                                    <%for(SanPham sanphamY : sanphamDAO.list4GuitarByMaNhomSP("GNSP005")){%>
                                     <div class="col-sm-3">
                                         <div class="product-image-wrapper">
                                             <div class="single-products">

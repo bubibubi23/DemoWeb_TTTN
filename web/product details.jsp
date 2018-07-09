@@ -73,9 +73,8 @@
                         <div class="category-tab shop-details-tab"><!--category-tab-->
                             <div class="col-sm-12">
                                 <ul class="nav nav-tabs">
-                                    <li><a href="#details" data-toggle="tab">Details</a></li>
-                                    <li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
-                                    <li><a href="#tag" data-toggle="tab">Tag</a></li>
+                                    <li><a href="#details" data-toggle="tab">Thông số sản phẩm</a></li>
+                                    <li><a href="#companyprofile" data-toggle="tab">Mô tả</a></li>                                   
                                     <li class="active"><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
                                 </ul>
                             </div>
