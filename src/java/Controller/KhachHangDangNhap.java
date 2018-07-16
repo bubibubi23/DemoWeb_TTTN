@@ -60,6 +60,7 @@ public class KhachHangDangNhap extends HttpServlet {
             if(err.length() == 0){
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
+                
                 url = "/index.jsp";
             }else{
                 url = "/login.jsp";

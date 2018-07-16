@@ -69,7 +69,7 @@
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
                                     <%if(session.getAttribute("username")!=null){%>
-                                    <li><a href="#"><i class="fa fa-user"></i> <%=session.getAttribute("username")%></a></li>
+                                    <li><a href="account.jsp"><i class="fa fa-user"></i> <%=session.getAttribute("username")%></a></li>
                                     <%}%>
                                     <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                     <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>

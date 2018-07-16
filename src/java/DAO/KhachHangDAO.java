@@ -29,6 +29,7 @@ public class KhachHangDAO {
             PreparedStatement ps = conn.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
             
+            while(rs.next()){
             khachhang.setMaKH(rs.getString("MaKH"));
             khachhang.setHoTen(rs.getString("HoTen"));
             khachhang.setDiaChi(rs.getString("DiaChi"));
@@ -38,7 +39,7 @@ public class KhachHangDAO {
             khachhang.setUsername(rs.getString("Username"));
             khachhang.setPassword(rs.getString("Password"));
             khachhang.setTrangThai(rs.getInt("TrangThai"));
-            
+            }
             
         } catch (SQLException ex) {
             Logger.getLogger(KhachHangDAO.class.getName()).log(Level.SEVERE, null, ex);
