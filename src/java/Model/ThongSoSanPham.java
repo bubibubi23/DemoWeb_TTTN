@@ -10,24 +10,30 @@ package Model;
  * @author Acer_Aspire
  */
 public class ThongSoSanPham {
-    private String MaTSSP;
+    private int MaTSSP;
     private String MaSP;
     private String ThongSoSP;
 
     public ThongSoSanPham() {
     }
+    
+    public ThongSoSanPham( String MaSP, String ThongSoSP) {
+        
+        this.MaSP = MaSP;
+        this.ThongSoSP = ThongSoSP;
+    }
 
-    public ThongSoSanPham(String MaTSSP, String MaSP, String ThongSoSP) {
+    public ThongSoSanPham(int MaTSSP, String MaSP, String ThongSoSP) {
         this.MaTSSP = MaTSSP;
         this.MaSP = MaSP;
         this.ThongSoSP = ThongSoSP;
     }
 
-    public String getMaTSSP() {
+    public int getMaTSSP() {
         return MaTSSP;
     }
 
-    public void setMaTSSP(String MaTSSP) {
+    public void setMaTSSP(int MaTSSP) {
         this.MaTSSP = MaTSSP;
     }
 

@@ -41,7 +41,7 @@ public class CapNhatThongTinKH extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         
-        
+        String Username = request.getParameter("Username");
         String HoTen = request.getParameter("hoten");
         String DiaChi = request.getParameter("diachi");
         String SDT = request.getParameter("SDT");
@@ -50,12 +50,14 @@ public class CapNhatThongTinKH extends HttpServlet {
         String url = "/account.jsp";
         
         HttpSession session = request.getSession();
-        KhachHang khachhang = khachhangDAO.timKhachHang((String) session.getAttribute("username"));
         
+        KhachHang khachhang = (KhachHang) session.getAttribute("khachhang");
         
         
         khachhangDAO.capNhatKhachHang(new KhachHang(khachhang.getMaKH(), HoTen, DiaChi, SDT, GioiTinh, Email, khachhang.getUsername(), khachhang.getPassword(), khachhang.getTrangThai()));
-               
+        khachhang = khachhangDAO.timKhachHang(khachhang.getUsername());
+        
+        session.setAttribute("khachhang", khachhang);
         
         RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
         rd.forward(request, response);

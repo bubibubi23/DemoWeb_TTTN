@@ -62,4 +62,25 @@ public class NhomSanPhamDAO {
         }
         return list;
     }
+    //Lay thong tin nhom san pham
+    public NhomSanPham getNhomSanPham(String MaNhomSP){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT * FROM nhomsanpham WHERE MaNhomSP = '"+MaNhomSP+"'";
+        NhomSanPham nhomsanpham = new NhomSanPham();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                
+                nhomsanpham.setMaNhomSP(rs.getString("MaNhomSP"));
+                nhomsanpham.setTenNhomSP(rs.getString("TenNhomSP"));
+                
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(NhomSanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nhomsanpham;
+    }
+    
 }

@@ -10,7 +10,7 @@ package Model;
  * @author Acer_Aspire
  */
 public class ChiTietDonHang {
-    private String MaDH;
+    private int MaDH;
     private String MaSP;
     private int SoLuong;
     private int Gia;
@@ -18,18 +18,18 @@ public class ChiTietDonHang {
     public ChiTietDonHang() {
     }
 
-    public ChiTietDonHang(String MaDH, String MaSP, int SoLuong, int Gia) {
+    public ChiTietDonHang(int MaDH, String MaSP, int SoLuong, int Gia) {
         this.MaDH = MaDH;
         this.MaSP = MaSP;
         this.SoLuong = SoLuong;
         this.Gia = Gia;
     }
 
-    public String getMaDH() {
+    public int getMaDH() {
         return MaDH;
     }
 
-    public void setMaDH(String MaDH) {
+    public void setMaDH(int MaDH) {
         this.MaDH = MaDH;
     }
 

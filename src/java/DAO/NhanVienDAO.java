@@ -73,6 +73,32 @@ public class NhanVienDAO {
         }
         return list;
     }
+    //Lay danh sach nhan vien dang hoat dong
+    public ArrayList<NhanVien> listNhanVienHoatDong(){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT * FROM nhanvien WHERE TrangThai = '0'";
+        ArrayList<NhanVien> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                NhanVien nhanvien = new NhanVien();
+                
+                nhanvien.setMaNV(rs.getString("MaNV"));
+                nhanvien.setUsername(rs.getString("Username"));
+                nhanvien.setPassword(rs.getString("Password"));
+                nhanvien.setHoTen(rs.getString("HoTen"));
+                nhanvien.setSDT(rs.getString("SDT"));
+                nhanvien.setQuyen(rs.getString("Quyen"));
+                nhanvien.setTrangThai(rs.getInt("TrangThai"));
+                
+                list.add(nhanvien);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
     
     //Lay danh sach nhan vien dua vao quyen
     public ArrayList<NhanVien> listNhanVienByQuyen(String quyen){
@@ -101,17 +127,15 @@ public class NhanVienDAO {
         return list;
     }
     
-    //Lay danh sach nhan vien dua vao MaNV
-    public ArrayList<NhanVien> listNhanVienByMaNV(String manv){
+    //Lay thong tin nhan vien dua vao MaNV
+    public NhanVien getNhanVienByMaNV(String manv){
         Connection conn = DBConnect.getConnection();
         String sql = "SELECT * FROM nhanvien WHERE MaNV = '"+manv+"'";
-        ArrayList<NhanVien> list = new ArrayList<>();
+        NhanVien nhanvien = new NhanVien();
         try {
             PreparedStatement ps = conn.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                NhanVien nhanvien = new NhanVien();
-                
+            while(rs.next()){                               
                 nhanvien.setMaNV(rs.getString("MaNV"));
                 nhanvien.setUsername(rs.getString("Username"));
                 nhanvien.setPassword(rs.getString("Password"));
@@ -120,14 +144,47 @@ public class NhanVienDAO {
                 nhanvien.setQuyen(rs.getString("Quyen"));
                 nhanvien.setTrangThai(rs.getInt("TrangThai"));
                 
-                list.add(nhanvien);
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+        return nhanvien;
     }
-    
+    //kiem tra ten dang nhap cua nhan vien
+    public boolean KiemTraNhanVien(String Username){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT * FROM nhanvien WHERE Username = '"+Username+"'";
+        
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                conn.close();
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    //kiem tra ma NV
+    public boolean KiemTraMaNV(String MaNV){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT * FROM nhanvien WHERE MaNV = '"+MaNV+"'";
+        
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                conn.close();
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     //Them nhan vien
     public boolean themNhanVien(NhanVien nhanvien){
         Connection conn = DBConnect.getConnection();
@@ -152,7 +209,7 @@ public class NhanVienDAO {
     //Cap nhat nhan vien
     public boolean capNhatNhanVien(NhanVien nhanvien){
         Connection conn = DBConnect.getConnection();
-        String sql = "UPDATE nhanvien SET Password = ?, HoTen = ?, SDT = ?, Quyen = ?, TrangThai = ? WHERE MaNV = ?";
+        String sql = "UPDATE nhanvien SET Password = ?, HoTen = ?, SDT = ?, Quyen = ? WHERE MaNV = ?";
         
         try {
             PreparedStatement ps = conn.prepareCall(sql);
@@ -160,8 +217,7 @@ public class NhanVienDAO {
             ps.setString(2, nhanvien.getHoTen());
             ps.setString(3, nhanvien.getSDT());
             ps.setString(4, nhanvien.getQuyen());
-            ps.setInt(5, nhanvien.getTrangThai());
-            ps.setString(6, nhanvien.getMaNV());
+            ps.setString(5, nhanvien.getMaNV());
             
             return ps.executeUpdate() == 1;
         } catch (SQLException ex) {

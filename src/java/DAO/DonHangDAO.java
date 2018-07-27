@@ -32,8 +32,39 @@ public class DonHangDAO {
             while(rs.next()){
                 DonHang donhang = new DonHang();
                 
-                donhang.setMaDH(rs.getString("MaDH"));
-                donhang.setMaKH(rs.getString("MaKH"));
+                donhang.setMaDH(rs.getInt("MaDH"));
+                donhang.setMaKH(rs.getInt("MaKH"));
+                donhang.setMaNV(rs.getString("MaNV"));
+                donhang.setNgayTao(rs.getDate("NgayTao"));
+                donhang.setNgayChuyenHang(rs.getDate("NgayChuyenHang"));
+                donhang.setPhuongThucThanhToan(rs.getString("PhuongThucThanhToan"));
+                donhang.setDiaChi(rs.getString("DiaChi"));
+                donhang.setSDT(rs.getString("SDT"));
+                donhang.setTrangThai(rs.getString("TrangThai"));
+                donhang.setHoTen(rs.getString("HoTen"));
+                donhang.setTongTien(rs.getInt("TongTien"));
+                
+                list.add(donhang);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DonHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;    
+    }
+    //Lay danh sach don hang bang MaKH
+    public ArrayList<DonHang> listDonHangByMaKH(int MaKH){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT * FROM donhang WHERE MaKH = '"+MaKH+"'";
+        ArrayList<DonHang> list = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                DonHang donhang = new DonHang();
+                
+                donhang.setMaDH(rs.getInt("MaDH"));
+                donhang.setMaKH(rs.getInt("MaKH"));
                 donhang.setMaNV(rs.getString("MaNV"));
                 donhang.setNgayTao(rs.getDate("NgayTao"));
                 donhang.setNgayChuyenHang(rs.getDate("NgayChuyenHang"));
@@ -52,7 +83,7 @@ public class DonHangDAO {
         return list;    
     }
     //Lay thong tin don hang
-    public DonHang getDonHang(String maDH){
+    public DonHang getDonHang(int maDH){
         Connection conn = DBConnect.getConnection();
         String sql = "SELECT * FROM donhang WHERE MaDH = '"+maDH+"'";
         DonHang donhang = new DonHang();
@@ -61,8 +92,8 @@ public class DonHangDAO {
             PreparedStatement ps = conn.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                donhang.setMaDH(rs.getString("MaDH"));
-                donhang.setMaKH(rs.getString("MaKH"));
+                donhang.setMaDH(rs.getInt("MaDH"));
+                donhang.setMaKH(rs.getInt("MaKH"));
                 donhang.setMaNV(rs.getString("MaNV"));
                 donhang.setNgayTao(rs.getDate("NgayTao"));
                 donhang.setNgayChuyenHang(rs.getDate("NgayChuyenHang"));
@@ -90,8 +121,8 @@ public class DonHangDAO {
             while(rs.next()){
                 DonHang donhang = new DonHang();
                 
-                donhang.setMaDH(rs.getString("MaDH"));
-                donhang.setMaKH(rs.getString("MaKH"));
+                donhang.setMaDH(rs.getInt("MaDH"));
+                donhang.setMaKH(rs.getInt("MaKH"));
                 donhang.setMaNV(rs.getString("MaNV"));
                 donhang.setNgayTao(rs.getDate("NgayTao"));
                 donhang.setNgayChuyenHang(rs.getDate("NgayChuyenHang"));
@@ -112,17 +143,17 @@ public class DonHangDAO {
     //Them don hang
     public boolean themDonHang(DonHang donhang){
         Connection conn = DBConnect.getConnection();
-        String sql = "INSERT INTO donhang(MaDH, MaKH, PhuongThucThanhToan, DiaChi, SDT, TrangThai, HoTen, TongTien) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO donhang(MaDH, MaKH, PhuongThucThanhToan, DiaChi, SDT, HoTen, TrangThai, TongTien) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
             PreparedStatement ps = conn.prepareCall(sql);
-            ps.setString(1, donhang.getMaDH());
-            ps.setString(2, donhang.getMaKH());
+            ps.setInt(1, donhang.getMaDH());
+            ps.setInt(2, donhang.getMaKH());
             ps.setString(3, donhang.getPhuongThucThanhToan());
             ps.setString(4, donhang.getDiaChi());
             ps.setString(5, donhang.getSDT());
-            ps.setString(6, donhang.getTrangThai());
-            ps.setString(7, donhang.getHoTen());
+            ps.setString(6, donhang.getHoTen());
+            ps.setString(7, donhang.getTrangThai());
             ps.setInt(8, donhang.getTongTien());
             
             return ps.executeUpdate() == 1;
@@ -140,7 +171,7 @@ public class DonHangDAO {
             PreparedStatement ps = conn.prepareCall(sql);
             ps.setString(1, donhang.getTrangThai());
             ps.setString(2, donhang.getMaNV());
-            ps.setString(3, donhang.getMaDH());
+            ps.setInt(3, donhang.getMaDH());
             
             return ps.executeUpdate() == 1;
         } catch (SQLException ex) {

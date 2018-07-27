@@ -4,6 +4,10 @@
     Author     : Acer_Aspire
 --%>
 
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.util.Locale"%>
+<%@page import="Model.DonHang"%>
+<%@page import="DAO.DonHangDAO"%>
 <%@page import="DAO.KhachHangDAO"%>
 <%@page import="Model.KhachHang"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,9 +18,15 @@
         <title>Khách Hàng</title>
     </head>
     <body>
-        <% String username =  (String) session.getAttribute("username"); 
-           KhachHangDAO khachhangDAO = new KhachHangDAO();
-           KhachHang khachhang = khachhangDAO.timKhachHang(username);
+        <% 
+            Locale localeVN = new Locale("vi", "VN");
+            NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+            KhachHang khachhang = (KhachHang) session.getAttribute("khachhang");
+            if(khachhang == null){
+                khachhang = new KhachHang();
+                session.setAttribute("khachhang", khachhang);
+            }
+            DonHangDAO donhangDAO = new DonHangDAO();
         %>
         <jsp:include page="header.jsp"></jsp:include>
 
@@ -28,7 +38,7 @@
 
                                 <div class="col-xs-12 col-sm-12 col-lg-9">
                                     <h3 > THÔNG TIN TÀI KHOẢN</h3>                                    
-                                    <p><strong>Xin chào, <%=username%></strong></p>
+                                    <p><strong>Xin chào, <%=khachhang.getUsername() %></strong></p>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-lg-3">
                                     <div class="block block-account">
@@ -53,38 +63,35 @@
                                                         <thead class="thead-default">
                                                             <tr>
                                                                 <th>Đơn hàng</th>
-                                                                <th>Ngày</th>
+                                                                <th>Ngày tạo</th>
                                                                 <th>Chuyển đến</th>
                                                                 <th>Địa chỉ</th>
                                                                 <th>Giá trị đơn hàng</th>
-                                                                <th>Tình trạng thanh toán</th>
+                                                                <th>Tình trạng</th>
                                                                 <th>&nbsp;</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                            <%for(DonHang donhang : donhangDAO.listDonHangByMaKH(khachhang.getMaKH())) {%>
                                                             <tr class="first odd">
-                                                                <td><a href='/account/orders/3558834'>#1198</a></td>
-                                                                <td>20/08/2017</td>
-                                                                <td>Nguyễn Công Việt Thanh</td>
+                                                                <td><a><%=donhang.getMaDH() %></a></td>
+                                                                <td><%=donhang.getNgayTao() %></td>
+                                                                <td><%=donhang.getHoTen() %></td>
                                                                 <! --  -->
                                                                 <td>
-                                                                    46 Man Thiện, TP Hồ Chí Minh, Việt Nam <!-- TP Hồ Chí Minh -->
+                                                                    <%=donhang.getDiaChi() %> <!-- TP Hồ Chí Minh -->
                                                                 </td>
-                                                                <td><span class="price">2.840.000₫</span></td>
+                                                                <td><span class="price"><%=currencyVN.format(donhang.getTongTien())%></span></td>
                                                                 <td>
-                                                                    <!-- <em>
-                                                                            
-                                                                            Đã thanh toán
-                                                                            
-                                                                    </em> -->
                                                                     <em>
 
-                                                                        Đã thanh toán
+                                                                        <%=donhang.getTrangThai() %>
 
                                                                     </em>
                                                                 </td>
                                                                 <td class="a-center last"><span class="nobr"> <a href="/account/orders/3558834">Xem chi tiết</a></span></td>
                                                             </tr>
+                                                            <%}%>
                                                         </tbody>
                                                     </table>
                                                 </div>

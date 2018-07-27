@@ -18,7 +18,7 @@ public class SanPham {
     private int Gia;
     private String HinhAnh;
     private String MoTa;
-    private String MaTSSP;
+    private int MaTSSP;
     private Date NgayThem;
     private int SoLuongTon;
     private int SoLuongThem;
@@ -27,8 +27,29 @@ public class SanPham {
 
     public SanPham() {
     }
+    
+    public SanPham(String MaSP, String TenSP, String MaNhomSP, int Gia, String HinhAnh, String MoTa, int MaTSSP, String LoaiSP) {
+        this.MaSP = MaSP;
+        this.TenSP = TenSP;
+        this.MaNhomSP = MaNhomSP;
+        this.Gia = Gia;
+        this.HinhAnh = HinhAnh;
+        this.MoTa = MoTa;
+        this.MaTSSP = MaTSSP;
+        this.LoaiSP = LoaiSP;
+    }
+    
+    public SanPham(String MaSP, String TenSP, String MaNhomSP, int Gia, String HinhAnh, String MoTa, String LoaiSP) {
+        this.MaSP = MaSP;
+        this.TenSP = TenSP;
+        this.MaNhomSP = MaNhomSP;
+        this.Gia = Gia;
+        this.HinhAnh = HinhAnh;
+        this.MoTa = MoTa;
+        this.LoaiSP = LoaiSP;
+    }
 
-    public SanPham(String MaSP, String TenSP, String MaNhomSP, int Gia, String HinhAnh, String MoTa, String MaTSSP, Date NgayThem, int SoLuongTon, int SoLuongThem, int TrangThai, String LoaiSP) {
+    public SanPham(String MaSP, String TenSP, String MaNhomSP, int Gia, String HinhAnh, String MoTa, int MaTSSP, Date NgayThem, int SoLuongTon, int SoLuongThem, int TrangThai, String LoaiSP) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;
         this.MaNhomSP = MaNhomSP;
@@ -91,11 +112,11 @@ public class SanPham {
         this.MoTa = MoTa;
     }
 
-    public String getMaTSSP() {
+    public int getMaTSSP() {
         return MaTSSP;
     }
 
-    public void setMaTSSP(String MaTSSP) {
+    public void setMaTSSP(int MaTSSP) {
         this.MaTSSP = MaTSSP;
     }
 
@@ -137,9 +158,5 @@ public class SanPham {
 
     public void setLoaiSP(String LoaiSP) {
         this.LoaiSP = LoaiSP;
-    }
-
-    
-
-    
+    }           
 }

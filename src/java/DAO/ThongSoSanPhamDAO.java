@@ -32,7 +32,7 @@ public class ThongSoSanPhamDAO {
             while(rs.next()){
                 ThongSoSanPham thongsosanpham = new ThongSoSanPham();
                 
-                thongsosanpham.setMaTSSP(rs.getString("MaTSSP"));
+                thongsosanpham.setMaTSSP(rs.getInt("MaTSSP"));
                 thongsosanpham.setMaSP(rs.getString("MaSP"));
                 thongsosanpham.setThongSoSP(rs.getString("ThongSoSanPham"));
                 
@@ -44,7 +44,7 @@ public class ThongSoSanPhamDAO {
         return list;
     }
     //Lay thong so san pham
-    public ThongSoSanPham getThongSoSanPham(String MaTSSP){
+    public ThongSoSanPham getThongSoSanPham(int MaTSSP){
         Connection conn = DBConnect.getConnection();
         String sql = "SELECT * FROM thongsosanpham WHERE MaTSSP = '"+MaTSSP+"'";
         
@@ -53,9 +53,30 @@ public class ThongSoSanPhamDAO {
             PreparedStatement ps = conn.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
             
-            thongsosanpham.setMaTSSP(rs.getString("MaTSSP"));
+            thongsosanpham.setMaTSSP(rs.getInt("MaTSSP"));
             thongsosanpham.setMaSP(rs.getString("MaSP"));
             thongsosanpham.setThongSoSP(rs.getString("ThongSoSanPham"));
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongSoSanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return thongsosanpham;
+    }
+    //Lay thong so san pham bang MaSP
+    public ThongSoSanPham getThongSoSanPham(String MaSP){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT * FROM thongsosanpham WHERE MaSP = '"+MaSP+"'";
+        
+        ThongSoSanPham thongsosanpham = new ThongSoSanPham();
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                thongsosanpham.setMaTSSP(rs.getInt("MaTSSP"));
+                thongsosanpham.setMaSP(rs.getString("MaSP"));
+                thongsosanpham.setThongSoSP(rs.getString("ThongSoSanPham"));
+            }
+                     
         } catch (SQLException ex) {
             Logger.getLogger(ThongSoSanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,13 +85,13 @@ public class ThongSoSanPhamDAO {
     //Them thong so san pham
     public boolean themThongSoSanPham(ThongSoSanPham thongsosanpham){
         Connection conn = DBConnect.getConnection();
-        String sql = "INSERT INTO thongsosanpham(MaTSSP, MaSP, ThongSoSanPham) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO thongsosanpham( MaSP, ThongSoSanPham) VALUES(?, ?)";
         
         try {
             PreparedStatement ps = conn.prepareCall(sql);
-            ps.setString(1, thongsosanpham.getMaTSSP());
-            ps.setString(2, thongsosanpham.getMaSP());
-            ps.setString(3, thongsosanpham.getThongSoSP());
+            
+            ps.setString(1, thongsosanpham.getMaSP());
+            ps.setString(2, thongsosanpham.getThongSoSP());
             
             return ps.executeUpdate() == 1;
         } catch (SQLException ex) {
@@ -81,12 +102,12 @@ public class ThongSoSanPhamDAO {
     //Cap nhat thong so san pham
     public boolean capNhatThongSoSanPham(ThongSoSanPham thongsosanpham){
         Connection conn = DBConnect.getConnection();
-        String sql = "UPDATE thongsosanpham SET thongsosanpham = ? WHERE MaTSSP = ?";
+        String sql = "UPDATE thongsosanpham SET thongsosanpham = ? WHERE MaSP = ?";
         
         try {
             PreparedStatement ps = conn.prepareCall(sql);
             ps.setString(1, thongsosanpham.getThongSoSP());
-            ps.setString(2, thongsosanpham.getMaTSSP());
+            ps.setString(2, thongsosanpham.getMaSP());
             
             return ps.executeUpdate() == 1;
         } catch (SQLException ex) {

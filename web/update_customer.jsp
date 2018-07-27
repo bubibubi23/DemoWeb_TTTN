@@ -4,6 +4,7 @@
     Author     : Acer_Aspire
 --%>
 
+<%@page import="Model.KhachHang"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,13 @@
         <title>Cập nhật thông tin</title>
     </head>
     <body>
+        <%
+            KhachHang khachhang = (KhachHang) session.getAttribute("khachhang");
+            if(khachhang == null){
+                khachhang = new KhachHang();
+                session.setAttribute("khachhang", khachhang);
+            }
+        %>
         <jsp:include page="header.jsp"></jsp:include>
         
         <section id="form"><!--form-->
@@ -25,14 +33,14 @@
                                     <h2>Địa Chỉ</h2>
                                     <input type="text" placeholder="Địa chỉ" required="" name="diachi"/>
                                     <h2>Số Điện Thoại</h2>
-                                    <input type="text" placeholder="Số điện thoại" required="" name="SDT"/>
-                                    <h2>Email</h2>
-                                    <input type="text" placeholder="Email" required="" name="email"/>
+                                    <input type="text" placeholder="Số điện thoại" required="" name="SDT"/>                                  
                                     <h2>Giới Tính</h2>                                   
                                     <select id="gioitinh" name="gioitinh">
                                             <option value="Nam">Nam</option>
                                             <option value="Nữ">Nữ</option>
-                                        </select>                                       
+                                        </select>
+                                    <input type="hidden" value="<%=khachhang.getEmail() %>" name="email"/>
+                                    <input type="hidden" value="<%=khachhang.getUsername() %>" name="Username"/>
                                     <button type="submit" class="btn btn-default" value="Submit">Cập nhật</button>
                                 </form>    
                             </div><!--/login form-->

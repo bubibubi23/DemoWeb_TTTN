@@ -20,6 +20,24 @@ public class NhanVien {
 
     public NhanVien() {
     }
+    
+    public NhanVien(String MaNV, String Password, String HoTen, String SDT, String Quyen) {
+        this.MaNV = MaNV;
+        this.Username = Username;
+        this.Password = Password;
+        this.HoTen = HoTen;
+        this.SDT = SDT;
+        this.Quyen = Quyen;       
+    }
+    
+    public NhanVien(String MaNV, String Username, String Password, String HoTen, String SDT, String Quyen) {
+        this.MaNV = MaNV;
+        this.Username = Username;
+        this.Password = Password;
+        this.HoTen = HoTen;
+        this.SDT = SDT;
+        this.Quyen = Quyen;       
+    }
 
     public NhanVien(String MaNV, String Username, String Password, String HoTen, String SDT, String Quyen, int TrangThai) {
         this.MaNV = MaNV;

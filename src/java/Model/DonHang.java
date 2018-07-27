@@ -12,8 +12,8 @@ import java.util.Date;
  * @author Acer_Aspire
  */
 public class DonHang {
-    private String MaDH;
-    private String MaKH;
+    private int MaDH;
+    private int MaKH;
     private String MaNV;
     private Date NgayTao;
     private Date NgayChuyenHang;
@@ -26,8 +26,19 @@ public class DonHang {
 
     public DonHang() {
     }
+    
+    public DonHang(int MaDH, int MaKH, String PhuongThucThanhToan, String DiaChi, String SDT, String HoTen, String TrangThai, int TongTien) {        
+        this.MaDH = MaDH;
+        this.MaKH = MaKH;   
+        this.PhuongThucThanhToan = PhuongThucThanhToan;
+        this.DiaChi = DiaChi;
+        this.SDT = SDT;
+        this.HoTen = HoTen;
+        this.TrangThai = TrangThai;
+        this.TongTien = TongTien;
+    }
 
-    public DonHang(String MaDH, String MaKH, String MaNV, Date NgayTao, Date NgayChuyenHang, String PhuongThucThanhToan, String DiaChi, String SDT, String HoTen, String TrangThai, int TongTien) {
+    public DonHang(int MaDH, int MaKH, String MaNV, Date NgayTao, Date NgayChuyenHang, String PhuongThucThanhToan, String DiaChi, String SDT, String HoTen, String TrangThai, int TongTien) {
         this.MaDH = MaDH;
         this.MaKH = MaKH;
         this.MaNV = MaNV;
@@ -41,19 +52,19 @@ public class DonHang {
         this.TongTien = TongTien;
     }
 
-    public String getMaDH() {
+    public int getMaDH() {
         return MaDH;
     }
 
-    public void setMaDH(String MaDH) {
+    public void setMaDH(int MaDH) {
         this.MaDH = MaDH;
     }
 
-    public String getMaKH() {
+    public int getMaKH() {
         return MaKH;
     }
 
-    public void setMaKH(String MaKH) {
+    public void setMaKH(int MaKH) {
         this.MaKH = MaKH;
     }
 

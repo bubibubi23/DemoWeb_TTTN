@@ -12,15 +12,13 @@ package Model;
 public class SanPhamGioHang {
     private SanPham sanpham;
     private int SoLuong;
-    private int DonGia;
 
     public SanPhamGioHang() {
     }
 
-    public SanPhamGioHang(SanPham sanpham, int SoLuong, int DonGia) {
+    public SanPhamGioHang(SanPham sanpham, int SoLuong) {
         this.sanpham = sanpham;
         this.SoLuong = SoLuong;
-        this.DonGia = DonGia;
     }
 
     public SanPham getSanpham() {
@@ -39,13 +37,6 @@ public class SanPhamGioHang {
         this.SoLuong = SoLuong;
     }
 
-    public int getDonGia() {
-        return DonGia;
-    }
-
-    public void setDonGia(int DonGia) {
-        this.DonGia = DonGia;
-    }
     
     
     

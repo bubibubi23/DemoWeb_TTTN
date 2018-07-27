@@ -4,6 +4,7 @@
     Author     : Acer_Aspire
 --%>
 
+<%@page import="Model.KhachHang"%>
 <%@page import="Model.NhomSanPham"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -28,6 +29,11 @@
     <body>
         <%
             NhomSanPhamDAO nhomSPDAO = new NhomSanPhamDAO();
+            KhachHang khachhang = (KhachHang) session.getAttribute("khachhang");
+            if(khachhang == null){
+                khachhang = new KhachHang();
+                session.setAttribute("khachhang", khachhang);
+            }
         %>
         <header id="header"><!--header-->
             <div class="header_top"><!--header_top-->
@@ -68,11 +74,11 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
-                                    <%if(session.getAttribute("username")!=null){%>
-                                    <li><a href="account.jsp"><i class="fa fa-user"></i> <%=session.getAttribute("username")%></a></li>
+                                    <%if(khachhang.getUsername()!=null){%>
+                                    <li><a href="account.jsp"><i class="fa fa-user"></i> <%=khachhang.getUsername() %></a></li>
                                     <%}%>
-                                    <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                    <li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                    <li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                     <li><a href="login.jsp"><i class="fa fa-lock"></i> Login</a></li>
                                     <li><a href="KhachHangDangNhap?command=logout"><i class="fa fa-lock"></i> Logout</a></li>
                                 </ul>
@@ -97,23 +103,23 @@
                             <div class="mainmenu pull-left">
                                 <ul class="nav navbar-nav collapse navbar-collapse">
                                     <li><a href="index.jsp" class="active">Trang Chủ</a></li>
-                                    <li class="dropdown"><a href="HienThiSanPham?command=Loai&LoaiSP=Acoustic">Đàn Guitar Acoustic<i class="fa fa-angle-down"></i></a>
+                                    <li class="dropdown"><a href="HienThiSanPham?command=Loai&LoaiSP=Acoustic&pages=1">Đàn Guitar Acoustic<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
                                             <%
                                                 for(NhomSanPham nhomsp : nhomSPDAO.getListGuitar()){
                                             %>
 
-                                            <li><a href="HienThiSanPham?command=LoaiMaNhom&MaNhomSP=<%=nhomsp.getMaNhomSP()%>&LoaiSP=Acoustic"><%=nhomsp.getTenNhomSP()%></a></li>
+                                            <li><a href="HienThiSanPham?command=LoaiMaNhom&MaNhomSP=<%=nhomsp.getMaNhomSP()%>&LoaiSP=Acoustic&pages=1"><%=nhomsp.getTenNhomSP()%></a></li>
                                             <%}%>
                                             
                                         </ul>
                                     </li> 
-                                    <li class="dropdown"><a href="HienThiSanPham?command=Loai&LoaiSP=Classic">Đàn Guitar Classic<i class="fa fa-angle-down"></i></a>
+                                    <li class="dropdown"><a href="HienThiSanPham?command=Loai&LoaiSP=Classic&pages=1">Đàn Guitar Classic<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
                                             <%
                                                 for(NhomSanPham nhomsp1 : nhomSPDAO.getListGuitar()){
                                             %>
-                                            <li><a href="HienThiSanPham?command=LoaiMaNhom&MaNhomSP=<%=nhomsp1.getMaNhomSP()%>&LoaiSP=Classic"><%=nhomsp1.getTenNhomSP()%></a></li>
+                                            <li><a href="HienThiSanPham?command=LoaiMaNhom&MaNhomSP=<%=nhomsp1.getMaNhomSP()%>&LoaiSP=Classic&pages=1"><%=nhomsp1.getTenNhomSP()%></a></li>
                                             <%}%>
                                         </ul>
                                     </li> 

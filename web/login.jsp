@@ -21,9 +21,12 @@
     </head>
     <body>
         <%
-            String err = "";
+            String err = "", userName_err = "";
             if(request.getAttribute("err") != null){
                 err = (String) request.getAttribute("err");
+            }
+            if(request.getAttribute("userName_err") != null){
+                userName_err = (String) request.getAttribute("userName_err");
             }
         %>
         <jsp:include page="header.jsp"></jsp:include>
@@ -51,10 +54,11 @@
                         <div class="col-sm-1">
                             <h2 class="or">Hoặc</h2>
                         </div>
+                        <h3 style="color: red"><%=userName_err%></h3>
                         <div class="col-sm-4">
                             <div class="signup-form"><!--sign up form-->
                                 <h2>Đăng ký thành viên</h2>
-                                <form action="#">
+                                <form action="KhachHangDangKy" method="post">
                                     <input type="text" placeholder="Tên tài khoản" name="username" required="" id="username"/>
                                     <input type="email" placeholder="Địa chỉ Email" name="email" required=""/>
                                     <input type="password" placeholder="Mật khẩu" name="pass" required=""/>

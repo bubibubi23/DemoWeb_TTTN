@@ -10,7 +10,7 @@ package Model;
  * @author Acer_Aspire
  */
 public class KhachHang {
-    private String MaKH;
+    private int MaKH;
     private String HoTen;
     private String DiaChi;
     private String SDT;
@@ -22,8 +22,19 @@ public class KhachHang {
 
     public KhachHang() {
     }
+    
+    public KhachHang(int MaKH, String HoTen, String DiaChi, String SDT, String GioiTinh, String Username, String Password, int TrangThai) {
+        this.MaKH = MaKH;
+        this.HoTen = HoTen;
+        this.DiaChi = DiaChi;
+        this.SDT = SDT;
+        this.GioiTinh = GioiTinh;     
+        this.Username = Username;
+        this.Password = Password;
+        this.TrangThai = TrangThai;
+    }
 
-    public KhachHang(String MaKH, String HoTen, String DiaChi, String SDT, String GioiTinh, String Email, String Username, String Password, int TrangThai) {
+    public KhachHang(int MaKH, String HoTen, String DiaChi, String SDT, String GioiTinh, String Email, String Username, String Password, int TrangThai) {
         this.MaKH = MaKH;
         this.HoTen = HoTen;
         this.DiaChi = DiaChi;
@@ -35,11 +46,11 @@ public class KhachHang {
         this.TrangThai = TrangThai;
     }
 
-    public String getMaKH() {
+    public int getMaKH() {
         return MaKH;
     }
 
-    public void setMaKH(String MaKH) {
+    public void setMaKH(int MaKH) {
         this.MaKH = MaKH;
     }
 

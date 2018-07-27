@@ -59,7 +59,7 @@ public class KhachHangDangNhap extends HttpServlet {
         try {
             if(err.length() == 0){
                 HttpSession session = request.getSession();
-                session.setAttribute("username", username);
+                session.setAttribute("khachhang", khachhang);
                 
                 url = "/index.jsp";
             }else{

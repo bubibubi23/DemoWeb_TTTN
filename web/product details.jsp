@@ -4,6 +4,7 @@
     Author     : Acer_Aspire
 --%>
 
+<%@page import="Model.GioHang"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.Locale"%>
 <%@page import="DAO.SanPhamDAO"%>
@@ -29,14 +30,17 @@
             SanPham sanpham = sanphamDAO.getSanPhamByMaSP(request.getParameter("MaSP"));
             Locale localeVN = new Locale("vi", "VN");
             NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+            GioHang giohang = (GioHang) session.getAttribute("giohang");
+            if(giohang == null){
+                giohang = new GioHang();
+                session.setAttribute("giohang", giohang);
+            }
         %>
         <jsp:include page="header.jsp"></jsp:include>
 
             <section>
                 <div class="container">
                     <div class="row">
-
-
                         <div class="col-sm-12 padding-right">
                             <div class="product-details"><!--product-details-->
                                 <div class="col-sm-5">
@@ -45,9 +49,7 @@
                                 </div>
 
                             </div>
-
-
-                            <div class="col-sm-6">
+                            <div class="col-sm-7">
                                 <div class="product-information"><!--/product-information-->
                                     <img src="images/product-details/new.jpg" class="newarrival" alt="" />
                                     <h2><%=sanpham.getTenSP()%></h2>
@@ -56,11 +58,15 @@
                                     <span>
                                         <span><%=currencyVN.format(sanpham.getGia())%></span>
                                         <label>Số Lượng:</label>
-                                        <input type="text" value="1" />
-                                        <button type="button" class="btn btn-fefault cart">
+                                        <form action="GioHangServlet" method="post">
+                                            <input type="number" value="1" name="SoLuong"/>
+                                            <input type="hidden" value="themDT" name="command"/>
+                                            <input type="hidden" value="<%=sanpham.getMaSP() %>" name="MaSP"/>
+                                            <button type="submit" class="btn btn-fefault cart">
                                             <i class="fa fa-shopping-cart"></i>
-                                            Add to cart
-                                        </button>
+                                            Thêm vào giỏ hàng
+                                            </button>
+                                        </form>
                                     </span>
                                     <p><b>Tình Trạng:</b> Còn Hàng</p>
                                     <p><b>Loại Sản Phẩm:</b> Hàng Mới</p>

@@ -35,21 +35,46 @@ public class HienThiSanPham extends HttpServlet {
         String command = request.getParameter("command");
         String MaNhomSP = request.getParameter("MaNhomSP");
         String LoaiSP = request.getParameter("LoaiSP");
+        int pages = 0;
+        if(request.getParameter("pages") != null)
+            pages = Integer.parseInt(request.getParameter("pages"));
+               
+        int firstResult = 0, maxResult = 0, total = 0;
+        
         
         switch(command){
             case "MaNhomSP":
-                list = sanphamDAO.listSanPhamByMaNhomSP(MaNhomSP);
+                total = sanphamDAO.tongSanPhamByMaNhomSP(MaNhomSP);                
+                firstResult= (pages - 1)*6;
+                maxResult = 6;                
+                list = sanphamDAO.listSanPhamMaNhomSPByPages(MaNhomSP, firstResult, maxResult);
                 request.setAttribute("list", list);
+                request.setAttribute("total", total);
+                request.setAttribute("pages", pages);
+                request.setAttribute("command", command);
                 request.getRequestDispatcher(url).include(request, response);
                 break;
             case "LoaiMaNhom":
-                list = sanphamDAO.listSanPhamChiTiet(MaNhomSP, LoaiSP);
+                total = sanphamDAO.tongSanPhamChiTiet(MaNhomSP, LoaiSP);
+                firstResult= (pages - 1)*6;
+                maxResult = 6;
+                
+                list = sanphamDAO.listSanPhamChiTietByPages(MaNhomSP, LoaiSP, firstResult, maxResult);
                 request.setAttribute("list", list);
+                request.setAttribute("total", total);
+                request.setAttribute("pages", pages);
+                request.setAttribute("command", command);
                 request.getRequestDispatcher(url).include(request, response);
                 break;
             case "Loai":
-                list = sanphamDAO.listSanPhamByLoaiSP(LoaiSP);
+                total = sanphamDAO.tongSanPhamByLoaiSP(LoaiSP);               
+                firstResult= (pages - 1)*6;
+                maxResult = 6;
+                list = sanphamDAO.listSanPhamLoaiSPByPages(LoaiSP, firstResult, maxResult);
                 request.setAttribute("list", list);
+                request.setAttribute("total", total);
+                request.setAttribute("pages", pages);
+                request.setAttribute("command", command);
                 request.getRequestDispatcher(url).include(request, response);
                 break;
         }

@@ -4,6 +4,7 @@
     Author     : Acer_Aspire
 --%>
 
+<%@page import="Model.GioHang"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Model.SanPham"%>
 <%@page import="java.text.NumberFormat"%>
@@ -26,13 +27,24 @@
         <link href="css/responsive.css" rel="stylesheet">
     </head>
     <body>
-        <%
+        <%  int total = 0, pages = 0;
+            String LoaiSP = request.getParameter("LoaiSP");
+            String MaNhomSP = request.getParameter("MaNhomSP");
+            
             SanPhamDAO sanphamDAO = new SanPhamDAO();
             Locale localeVN = new Locale("vi", "VN");
             NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
             ArrayList<SanPham> list = (ArrayList<SanPham>) request.getAttribute("list");
-            
-            
+            String command = request.getAttribute("command").toString();
+            if(request.getAttribute("pages") != null && request.getAttribute("total") != null){
+                pages =  Integer.parseInt(request.getAttribute("pages").toString());
+                total =  Integer.parseInt(request.getAttribute("total").toString());
+            }
+            GioHang giohang = (GioHang) session.getAttribute("giohang");
+            if(giohang == null){
+                giohang = new GioHang();
+                session.setAttribute("giohang", giohang);
+            }
         %>
         <jsp:include page="header.jsp"></jsp:include>
 
@@ -46,11 +58,11 @@
                                 <h2>Brands</h2>
                                 <div class="brands-name">
                                     <ul class="nav nav-pills nav-stacked">
-                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP001"> <span class="pull-right">(50)</span>EPIPHONE</a></li>
-                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP002"> <span class="pull-right">(56)</span>IBANEZ</a></li>
-                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP003"> <span class="pull-right">(27)</span>TAKAMINE</a></li>
-                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP004"> <span class="pull-right">(32)</span>CORT</a></li>
-                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP005"> <span class="pull-right">(5)</span>YAMAHA</a></li>                                       
+                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP001&pages=1"> <span class="pull-right">(50)</span>EPIPHONE</a></li>
+                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP002&pages=1"> <span class="pull-right">(56)</span>IBANEZ</a></li>
+                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP003&pages=1"> <span class="pull-right">(27)</span>TAKAMINE</a></li>
+                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP004&pages=1"> <span class="pull-right">(32)</span>CORT</a></li>
+                                        <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=GNSP005&pages=1"> <span class="pull-right">(5)</span>YAMAHA</a></li>                                       
                                     </ul>
                                 </div>
                             </div><!--/brands_products-->
@@ -75,7 +87,7 @@
                                             <a href="product details.jsp?MaSP=<%=sanpham.getMaSP() %>"><img src="<%=sanpham.getHinhAnh()%>" alt="" /></a>
                                             <h2><%=currencyVN.format(sanpham.getGia())%></h2>
                                             <a href="product details.jsp?MaSP=<%=sanpham.getMaSP() %>" ><p><%=sanpham.getTenSP()%></p></a>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href="GioHangServlet?command=themPRD&MaSP=<%=sanpham.getMaSP() %>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                                         </div>                            
                                     </div>                                  
                                 </div>
@@ -84,10 +96,45 @@
                             
                         </div><!--features_items-->
                         <ul class="pagination">
-                                <li class="active"><a href="">1</a></li>
-                                <li><a href="">2</a></li>
-                                <li><a href="">3</a></li>
-                                <li><a href="">&raquo;</a></li>
+                            <%  int next = 1;%>
+                            <%if(command.equals("Loai")){
+                                %>
+                            
+                            <%      for(int i = 1; i <= (total/6) + 1; i++){ 
+                                    if(i == pages){
+                            %>
+                            <li class="active"><a href="HienThiSanPham?command=Loai&LoaiSP=<%=LoaiSP%>&pages=<%=i %>"><%=i %></a></li>
+                                    <%}else{%>
+                                <li ><a href="HienThiSanPham?command=Loai&LoaiSP=<%=LoaiSP%>&pages=<%=i %>"><%=i %></a></li>
+                            <%          }
+                                    }
+                            %>                               
+                                <li><a href="HienThiSanPham?command=Loai&LoaiSP=<%=LoaiSP%>&pages=<%=++next %>">&raquo;</a></li>
+                            <%}%>    
+                            <%if(command.equals("MaNhomSP")){%>
+                            <%      for(int i = 1; i <= (total/6) + 1; i++){ 
+                                    if(i == pages){
+                            %>
+                            <li class="active"><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=<%=MaNhomSP%>&pages=<%=i %>"><%=i %></a></li>
+                                    <%}else{%>
+                                <li ><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=<%=MaNhomSP%>&pages=<%=i %>"><%=i %></a></li>
+                            <%          }
+                                    }
+                            %>                               
+                                <li><a href="HienThiSanPham?command=MaNhomSP&MaNhomSP=<%=MaNhomSP%>&pages=<%=++next %>">&raquo;</a></li>
+                            <%}%>
+                            <%if(command.equals("LoaiMaNhom")){ %>
+                            <%      for(int i = 1; i <= (total/6) + 1; i++){ 
+                                    if(i == pages){
+                            %>
+                            <li class="active"><a href="HienThiSanPham?command=LoaiMaNhom&MaNhomSP=<%=MaNhomSP%>&LoaiSP=<%=LoaiSP%>&pages=<%=i %>"><%=i %></a></li>
+                                    <%}else{%>
+                                <li ><a href="HienThiSanPham?command=LoaiMaNhom&MaNhomSP=<%=MaNhomSP%>&LoaiSP=<%=LoaiSP%>&pages=<%=i %>"><%=i %></a></li>
+                            <%          }
+                                    }
+                            %>                               
+                                <li><a href="HienThiSanPham?command=LoaiMaNhom&MaNhomSP=<%=MaNhomSP%>&LoaiSP=<%=LoaiSP%>&pages=<%=++next%>">&raquo;</a></li>
+                            <%}%>                            
                         </ul>
                     </div>
                 </div>

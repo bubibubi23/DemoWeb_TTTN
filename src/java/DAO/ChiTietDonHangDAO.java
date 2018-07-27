@@ -31,7 +31,7 @@ public class ChiTietDonHangDAO {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 ChiTietDonHang chitietdonhang = new ChiTietDonHang();
-                chitietdonhang.setMaDH(rs.getString("MaDH"));
+                chitietdonhang.setMaDH(rs.getInt("MaDH"));
                 chitietdonhang.setMaSP(rs.getString("MaSP"));
                 chitietdonhang.setSoLuong(rs.getInt("SoLuong"));
                 chitietdonhang.setGia(rs.getInt("Gia"));
@@ -50,7 +50,7 @@ public class ChiTietDonHangDAO {
         
         try {
             PreparedStatement ps= conn.prepareCall(sql);
-            ps.setString(1, chitietdonhang.getMaDH());
+            ps.setInt(1, chitietdonhang.getMaDH());
             ps.setString(2, chitietdonhang.getMaSP());
             ps.setInt(3, chitietdonhang.getSoLuong());
             ps.setInt(4, chitietdonhang.getGia());

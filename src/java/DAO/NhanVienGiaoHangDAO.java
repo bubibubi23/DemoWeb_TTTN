@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * @author Acer_Aspire
  */
 public class NhanVienGiaoHangDAO {
-    //Lay danh sach nhan vien giao hang
+    //Lay danh sach tat ca nhan vien giao hang
     public ArrayList<NhanVienGiaoHang> listNhanVienGiaoHang(){
         Connection conn = DBConnect.getConnection();
         String sql = "SELECT * FROM nhanviengiaohang";
@@ -52,6 +52,34 @@ public class NhanVienGiaoHangDAO {
     public ArrayList<NhanVienGiaoHang> listNhanVienGiaoHangTrangThai(String TrangThai){
         Connection conn = DBConnect.getConnection();
         String sql = "SELECT * FROM nhanviengiaohang WHERE TrangThai = '"+TrangThai+"'";
+        
+        ArrayList<NhanVienGiaoHang> list = new ArrayList<>();
+        
+            PreparedStatement ps;
+        try {
+            ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                NhanVienGiaoHang nhanviengiaohang = new NhanVienGiaoHang();
+                
+                nhanviengiaohang.setMaNVGiaoHang(rs.getString("MaNVGiaoHang"));
+                nhanviengiaohang.setHoTen(rs.getString("HoTen"));
+                nhanviengiaohang.setSDT(rs.getString("SDT"));
+                nhanviengiaohang.setEmail(rs.getString("Email"));
+                nhanviengiaohang.setDiaChi(rs.getString("DiaChi"));
+                nhanviengiaohang.setTrangThai(rs.getString("TrangThai"));
+                
+                list.add(nhanviengiaohang);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienGiaoHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return list;
+    }
+    //Lay danh sach nhan vien giao hang dang hoat dong
+    public ArrayList<NhanVienGiaoHang> listNhanVienGiaoHangHoatDong(){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT * FROM nhanviengiaohang WHERE TrangThai = '0'";
         
         ArrayList<NhanVienGiaoHang> list = new ArrayList<>();
         
@@ -120,7 +148,7 @@ public class NhanVienGiaoHangDAO {
     //Cap nhat nhan vien giao hang
     public boolean capNhatNhanVienGiaoHang(NhanVienGiaoHang nhanviengiaohang){
         Connection conn = DBConnect.getConnection();
-        String sql = "UPDATE nhanviengiaohang SET HoTen = ?, SDT = ?, Email = ?, DiaChi = ?, TrangThai = ? WHERE MaNVGiaoHang = ?";
+        String sql = "UPDATE nhanviengiaohang SET HoTen = ?, SDT = ?, Email = ?, DiaChi = ? WHERE MaNVGiaoHang = ?";
         
         try {
             PreparedStatement ps =conn.prepareCall(sql);
@@ -128,8 +156,7 @@ public class NhanVienGiaoHangDAO {
             ps.setString(2, nhanviengiaohang.getSDT());
             ps.setString(3, nhanviengiaohang.getEmail());
             ps.setString(4, nhanviengiaohang.getDiaChi());
-            ps.setString(5, nhanviengiaohang.getTrangThai());
-            ps.setString(6, nhanviengiaohang.getMaNVGiaoHang());
+            ps.setString(5, nhanviengiaohang.getMaNVGiaoHang());
             
             return ps.executeUpdate() == 1;
         } catch (SQLException ex) {
@@ -150,6 +177,23 @@ public class NhanVienGiaoHangDAO {
             return ps.executeUpdate() == 1;
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienGiaoHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean KiemTraMaNVGiaoHang(String MaNVGiaoHang){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT * FROM nhanviengiaohang WHERE MaNVGiaoHang = '"+MaNVGiaoHang+"'";
+        
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                conn.close();
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }

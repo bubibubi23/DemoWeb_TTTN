@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +20,35 @@ import java.util.logging.Logger;
  * @author Acer_Aspire
  */
 public class KhachHangDAO {
+    //Lay danh sach tat ca khach hang
+    public ArrayList<KhachHang> listKhachHang(){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT * FROM khachhang";
+        ArrayList<KhachHang> list = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                KhachHang khachhang = new KhachHang();
+                
+                khachhang.setMaKH(rs.getInt("MaKH"));
+                khachhang.setHoTen(rs.getString("HoTen"));
+                khachhang.setDiaChi(rs.getString("DiaChi"));
+                khachhang.setSDT(rs.getString("SDT"));
+                khachhang.setGioiTinh(rs.getString("GioiTinh"));
+                khachhang.setEmail(rs.getString("Email"));
+                khachhang.setUsername(rs.getString("Username"));
+                khachhang.setPassword(rs.getString("Password"));
+                khachhang.setTrangThai(rs.getShort("TrangThai"));
+                
+                list.add(khachhang);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(KhachHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
     //Tim thong tin khach hang bang username
     public KhachHang timKhachHang(String username){
         Connection conn = DBConnect.getConnection();
@@ -30,7 +60,7 @@ public class KhachHangDAO {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-            khachhang.setMaKH(rs.getString("MaKH"));
+            khachhang.setMaKH(rs.getInt("MaKH"));
             khachhang.setHoTen(rs.getString("HoTen"));
             khachhang.setDiaChi(rs.getString("DiaChi"));
             khachhang.setSDT(rs.getString("SDT"));
@@ -46,6 +76,23 @@ public class KhachHangDAO {
         }
         return khachhang;
     }
+    //Kiem tra dang ky khach hang
+    public boolean KiemTraDangKyKhachHang(String Username){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT * FROM khachhang WHERE Username = '"+Username+"'";
+        
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                conn.close();
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(KhachHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     //kiem tra dang nhap khach hang
     public KhachHang KiemTraDangNhapKhachHang(String Username, String Password){
         Connection conn = DBConnect.getConnection();
@@ -58,7 +105,7 @@ public class KhachHangDAO {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-            khachhang.setMaKH(rs.getString("MaKH"));
+            khachhang.setMaKH(rs.getInt("MaKH"));
             khachhang.setHoTen(rs.getString("HoTen"));
             khachhang.setDiaChi(rs.getString("DiaChi"));
             khachhang.setSDT(rs.getString("SDT"));
@@ -80,18 +127,14 @@ public class KhachHangDAO {
     //Them khach hang
     public boolean themKhacHang(KhachHang khachhang){
         Connection conn = DBConnect.getConnection();
-        String sql = "INSERT INTO khachhang(MaKH, HoTen, DiaChi, SDT, GioiTinh, Email, Username, Password) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO khachhang(Email, Username, Password) VALUES(?, ?, ?)";
         
         try {
-            PreparedStatement ps = conn.prepareCall(sql);
-            ps.setString(1, khachhang.getMaKH());
-            ps.setString(2, khachhang.getHoTen());
-            ps.setString(3, khachhang.getDiaChi());
-            ps.setString(4, khachhang.getSDT());
-            ps.setString(5, khachhang.getGioiTinh());
-            ps.setString(6, khachhang.getEmail());
-            ps.setString(7, khachhang.getUsername());
-            ps.setString(8, khachhang.getPassword());
+            PreparedStatement ps = conn.prepareCall(sql);           
+            
+            ps.setString(1, khachhang.getEmail());
+            ps.setString(2, khachhang.getUsername());
+            ps.setString(3, khachhang.getPassword());
             
             return ps.executeUpdate() == 1;
         } catch (SQLException ex) {
@@ -113,7 +156,7 @@ public class KhachHangDAO {
             ps.setString(5, khachhang.getEmail());
             ps.setString(6, khachhang.getUsername());
             ps.setString(7, khachhang.getPassword());
-            ps.setString(8, khachhang.getMaKH());
+            ps.setInt(8, khachhang.getMaKH());
             return ps.executeUpdate() == 1;
         } catch (SQLException ex) {
             Logger.getLogger(KhachHangDAO.class.getName()).log(Level.SEVERE, null, ex);

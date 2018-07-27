@@ -19,6 +19,16 @@ public class NhanVienGiaoHang {
 
     public NhanVienGiaoHang() {
     }
+    
+    
+    
+    public NhanVienGiaoHang(String MaNVGiaoHang, String HoTen, String Sdt, String Email, String DiaChi) {
+        this.MaNVGiaoHang = MaNVGiaoHang;
+        this.HoTen = HoTen;
+        this.SDT = Sdt;
+        this.Email = Email;
+        this.DiaChi = DiaChi;
+    }
 
     public NhanVienGiaoHang(String MaNVGiaoHang, String HoTen, String Sdt, String Email, String TrangThai, String DiaChi) {
         this.MaNVGiaoHang = MaNVGiaoHang;
