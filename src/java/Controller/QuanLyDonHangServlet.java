@@ -33,11 +33,8 @@ public class QuanLyDonHangServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         
-        String command = request.getParameter("command");
-        int MaNV = 0;
-        if(request.getParameter("MaNV") != null){
-            MaNV = (int) Integer.parseInt(request.getParameter("MaNV"));
-        }
+        String command = request.getParameter("command");               
+        String MaNV = request.getParameter("MaNV");        
         ArrayList<DonHang> list = new ArrayList<>();
                 
         switch(command){
@@ -48,7 +45,7 @@ public class QuanLyDonHangServlet extends HttpServlet {
                 rd.forward(request, response);
                 break;
             case "showbyMaNV":    
-                list = donhangDAO.listDonHangByMaKH(MaNV);
+                list = donhangDAO.listDonHangByMaNV(MaNV);
                 request.setAttribute("list", list);
                 rd = getServletContext().getRequestDispatcher("/admin/manager_orders.jsp");
                 rd.forward(request, response);
@@ -65,15 +62,27 @@ public class QuanLyDonHangServlet extends HttpServlet {
                
         
         String command = request.getParameter("command");
+        String TrangThai = request.getParameter("TrangThai");
+        
         int MaDH = 0;
         if(request.getParameter("MaDH") != null){
             MaDH = (int) Integer.parseInt(request.getParameter("MaDH"));
         }
-        
+        ArrayList<DonHang> list = new ArrayList<>();
         DonHang donhang = donhangDAO.getDonHang(MaDH);
         
         switch(command){
-            case "update":
+            case "update":               
+                String MaNV = request.getParameter("MaNV");                
+                donhang.setMaNV(MaNV);
+                donhang.setTrangThai(TrangThai);
+                donhangDAO.capNhatDonHang(donhang);
+                list = donhangDAO.listDonHang();
+                request.setAttribute("list", list);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/manager_orders.jsp");
+                rd.forward(request, response);
+                break;
+            case "updateTrangThai":
                 
         }
     }

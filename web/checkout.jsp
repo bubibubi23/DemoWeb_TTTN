@@ -49,94 +49,102 @@
                             <li>Thanh toán</li>
                         </ol>
                     </div><!--/breadcrums-->
-                    <form action="ThanhToanServlet" method="post">
+                    <h3>Xin chào, <%=khachhang.getUsername()%></h3>
+                        <br/>
+                        <br/>
                     <div class="step-one">
                         <h2 class="heading">CHỌN PHƯƠNG THỨC THANH TOÁN</h2>
                     </div>
-                    <div class="checkout-options">
-                        <h3>Xin chào, <%=khachhang.getUsername()%></h3>
-                    <br/>
-                    <br/>
-                    <ul class="nav">
-                        <li>
-                            <label><input type="radio" name="phuongthucthanhtoan" value="COD" checked=""> Thanh toán tại nhà</label>
-                        </li>
-                        <li>
-                            <label><input type="radio" name="phuongthucthanhtoan" value="online"> Thanh toán online</label>
-                        </li>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="hosted_button_id" value="BB9D9DGP88AEN">
+                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                    </form>
+                        <br/>
+                        <br/>
+                    <form action="ThanhToanServlet" method="post">
 
-                    </ul>
-                </div><!--/checkout-options-->
+                        <div class="checkout-options">
+                            
+                        <ul class="nav">
+                            <li>
+                                <label><input type="radio" name="phuongthucthanhtoan" value="COD" checked=""> Thanh toán tại nhà</label>
+                            </li>
+
+
+                        </ul>
+                    </div><!--/checkout-options-->
 
 
 
-                <div class="review-payment">
-                    <h2>Kiểm tra giỏ hàng</h2>
-                </div>
-                <div class="table-responsive cart_info">
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr class="cart_menu">
-                                <td class="image">Sản phẩm</td>
-                                <td class="description"></td>
-                                <td class="price">Giá</td>
-                                <td class="quantity">Số lượng</td>
-                                <td class="total">Thành tiền</td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%for (Map.Entry<String, SanPhamGioHang> list : giohang.getGiohang().entrySet()) {%>
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="<%=list.getValue().getSanpham().getHinhAnh()%>" alt="" width="110" height="110"></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href=""><%=list.getValue().getSanpham().getTenSP()%></a></h4>
+                    <div class="review-payment">
+                        <h2>Kiểm tra giỏ hàng</h2>
+                    </div>
+                    <div class="table-responsive cart_info">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr class="cart_menu">
+                                    <td class="image">Sản phẩm</td>
+                                    <td class="description"></td>
+                                    <td class="price">Giá</td>
+                                    <td class="quantity">Số lượng</td>
+                                    <td class="total">Thành tiền</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for (Map.Entry<String, SanPhamGioHang> list : giohang.getGiohang().entrySet()) {%>
+                                <tr>
+                                    <td class="cart_product">
+                                        <a href=""><img src="<%=list.getValue().getSanpham().getHinhAnh()%>" alt="" width="110" height="110"></a>
+                                    </td>
+                                    <td class="cart_description">
+                                        <h4><a href=""><%=list.getValue().getSanpham().getTenSP()%></a></h4>
 
-                                </td>
-                                <td class="cart_price">
-                                    <p><%=currencyVN.format(list.getValue().getSanpham().getGia())%></p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        
-                                        <input class="cart_quantity_input" type="text" disabled="" name="quantity" value="<%=list.getValue().getSoLuong()%>" autocomplete="off" size="2">
-                                        
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price"><%=currencyVN.format(list.getValue().getSanpham().getGia() * list.getValue().getSoLuong())%></p>
-                                </td>
-                                
-                            </tr>
-                            <%}%>
-                            <tr>
-                                <td colspan="4">&nbsp;</td>
-                                <td colspan="2">
-                                    <table class="table table-condensed total-result">
-                                        <tr>
-                                            <td>Tổng tiền trong giỏ hàng</td>
-                                            <td><%=currencyVN.format(giohang.tongTienGioHang())%></td>
-                                        </tr>
-                                        
-                                        <tr class="shipping-cost">
-                                            <td>Phí giao hàng</td>
-                                            <td>Miễn phí</td>										
-                                        </tr>
-                                        <tr>
-                                            <td>Thành tiền</td>
-                                            <td><span><%=currencyVN.format(giohang.tongTienGioHang())%></span></td>
-                                        </tr>
-                                    </table>
+                                    </td>
+                                    <td class="cart_price">
+                                        <p><%=currencyVN.format(list.getValue().getSanpham().getGia())%></p>
+                                    </td>
+                                    <td class="cart_quantity">
+                                        <div class="cart_quantity_button">
+
+                                            <input class="cart_quantity_input" type="text" disabled="" name="quantity" value="<%=list.getValue().getSoLuong()%>" autocomplete="off" size="2">
+
+                                        </div>
+                                    </td>
+                                    <td class="cart_total">
+                                        <p class="cart_total_price"><%=currencyVN.format(list.getValue().getSanpham().getGia() * list.getValue().getSoLuong())%></p>
+                                    </td>
+
+                                </tr>
+                                <%}%>
+                                <tr>
+                                    <td colspan="4">&nbsp;</td>
+                                    <td colspan="2">
+                                        <table class="table table-condensed total-result">
+                                            <tr>
+                                                <td>Tổng tiền trong giỏ hàng</td>
+                                                <td><%=currencyVN.format(giohang.tongTienGioHang())%></td>
+                                            </tr>
+
+                                            <tr class="shipping-cost">
+                                                <td>Phí giao hàng</td>
+                                                <td>Miễn phí</td>										
+                                            </tr>
+                                            <tr>
+                                                <td>Thành tiền</td>
+                                                <td><span><%=currencyVN.format(giohang.tongTienGioHang())%></span></td>
+                                            </tr>
+                                        </table>
                                         <a class="btn btn-default update" href="cart.jsp">Trở về giỏ hàng</a>                                      
                                         <button class="btn btn-default check_out" type="submit">Xác nhận</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </form>                            
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>                            
             </div>
         </section> <!--/#cart_items-->
 

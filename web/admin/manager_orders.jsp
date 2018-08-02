@@ -118,7 +118,7 @@
                                                             </td>
                                                             
                                                             <td>
-                                                                <a href="${root}/QuanLyDonHangServlet?command=update&MaDH=<%=donhang.getMaDH() %>"> <button class="item" data-toggle="tooltip" data-placement="top" title="Cập nhật đơn hàng">
+                                                                <a href="${root}/admin/update_orders.jsp?command=update&MaDH=<%=donhang.getMaDH() %>"> <button class="item" data-toggle="tooltip" data-placement="top" title="Cập nhật đơn hàng">
                                                                     <i class="zmdi zmdi-edit"></i>
                                                                     </button></a>
                                                                 <a href="${root}/QuanLyDonHangServlet?command=updatetrangthai&MaDH=<%=donhang.getMaDH() %>"> <button class="item" data-toggle="tooltip" data-placement="top" title="Cập nhật trạng thái">

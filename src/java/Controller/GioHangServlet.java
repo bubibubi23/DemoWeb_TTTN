@@ -78,7 +78,7 @@ public class GioHangServlet extends HttpServlet {
                         giohang.themSanPhamGioHang(MaSP, new SanPhamGioHang(sanpham, SoLuong));
                     }
                     session.setAttribute("giohang", giohang);
-                    url = "/product details.jsp";
+                    url = "/product_details.jsp";
                     rd = getServletContext().getRequestDispatcher(url);
                     rd.forward(request, response);
                     break;

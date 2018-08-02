@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class ChiTietDonHangDAO {
     //Lay danh sach chi tiet don hang bang MaDH
-    public ArrayList<ChiTietDonHang> listChiTietDonHangByMaDH(String MaDH){
+    public ArrayList<ChiTietDonHang> listChiTietDonHangByMaDH(int MaDH){
         Connection conn = DBConnect.getConnection();
         String sql = "SELECT * FROM chitietdonhang WHERE MaDH = '"+MaDH+"'";
         ArrayList<ChiTietDonHang> list = new ArrayList<>();

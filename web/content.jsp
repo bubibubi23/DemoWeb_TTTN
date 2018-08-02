@@ -74,9 +74,9 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <a href="product details.jsp?MaSP=<%=sanpham.getMaSP() %>"><img src="<%=sanpham.getHinhAnh()%>" alt="" /></a>
+                                            <a href="product_details.jsp?MaSP=<%=sanpham.getMaSP() %>"><img src="<%=sanpham.getHinhAnh()%>" alt="" /></a>
                                             <h2><%=currencyVN.format(sanpham.getGia())%></h2>
-                                            <a href="product details.jsp?MaSP=<%=sanpham.getMaSP() %>" ><p><%=sanpham.getTenSP()%></p></a>
+                                            <a href="product_details.jsp?MaSP=<%=sanpham.getMaSP() %>" ><p><%=sanpham.getTenSP()%></p></a>
                                             <a href="GioHangServlet?command=themIDX&MaSP=<%=sanpham.getMaSP() %>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                                         </div>  
                                     </div>
@@ -103,9 +103,9 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <a href="product details.jsp?MaSP=<%=sanphamE.getMaSP() %>"><img src="<%=sanphamE.getHinhAnh()%>" alt="" /></a>
+                                                    <a href="product_details.jsp?MaSP=<%=sanphamE.getMaSP() %>"><img src="<%=sanphamE.getHinhAnh()%>" alt="" /></a>
                                                     <h2><%=currencyVN.format(sanphamE.getGia())%></h2>
-                                                    <a href="product details.jsp?MaSP=<%=sanphamE.getMaSP() %>"><p><%=sanphamE.getTenSP()%></p></a>
+                                                    <a href="product_details.jsp?MaSP=<%=sanphamE.getMaSP() %>"><p><%=sanphamE.getTenSP()%></p></a>
                                                     <a href="GioHangServlet?command=themIDX&MaSP=<%=sanphamE.getMaSP() %>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                                                 </div>
                                             </div>
@@ -119,9 +119,9 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <a href="product details.jsp?MaSP=<%=sanphamI.getMaSP() %>"><img src="<%=sanphamI.getHinhAnh()%>" alt="" /></a>
+                                                    <a href="product_details.jsp?MaSP=<%=sanphamI.getMaSP() %>"><img src="<%=sanphamI.getHinhAnh()%>" alt="" /></a>
                                                     <h2><%=currencyVN.format(sanphamI.getGia())%></h2>
-                                                    <a href="product details.jsp?MaSP=<%=sanphamI.getMaSP() %>"><p><%=sanphamI.getTenSP() %></p></a>
+                                                    <a href="product_details.jsp?MaSP=<%=sanphamI.getMaSP() %>"><p><%=sanphamI.getTenSP() %></p></a>
                                                     <a href="GioHangServlet?command=themIDX&MaSP=<%=sanphamI.getMaSP() %>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                                                 </div>
                                             </div>
@@ -135,9 +135,9 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <a href="product details.jsp?MaSP=<%=sanphamT.getMaSP() %>"><img src="<%=sanphamT.getHinhAnh() %>" alt="" /></a>
+                                                    <a href="product_details.jsp?MaSP=<%=sanphamT.getMaSP() %>"><img src="<%=sanphamT.getHinhAnh() %>" alt="" /></a>
                                                     <h2><%=currencyVN.format(sanphamT.getGia()) %></h2>
-                                                    <a href="product details.jsp?MaSP=<%=sanphamT.getMaSP() %>"><p><%=sanphamT.getTenSP() %></p></a>
+                                                    <a href="product_details.jsp?MaSP=<%=sanphamT.getMaSP() %>"><p><%=sanphamT.getTenSP() %></p></a>
                                                     <a href="GioHangServlet?command=themIDX&MaSP=<%=sanphamT.getMaSP() %>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                                                 </div>
                                             </div>
@@ -151,9 +151,9 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <a href="product details.jsp?MaSP=<%=sanphamC.getMaSP() %>"><img src="<%=sanphamC.getHinhAnh() %>" alt="" /></a>
+                                                    <a href="product_details.jsp?MaSP=<%=sanphamC.getMaSP() %>"><img src="<%=sanphamC.getHinhAnh() %>" alt="" /></a>
                                                     <h2><%=currencyVN.format(sanphamC.getGia())%></h2>
-                                                    <a href="product details.jsp?MaSP=<%=sanphamC.getMaSP() %>"><p><%=sanphamC.getTenSP() %></p></a>
+                                                    <a href="product_details.jsp?MaSP=<%=sanphamC.getMaSP() %>"><p><%=sanphamC.getTenSP() %></p></a>
                                                     <a href="GioHangServlet?command=themIDX&MaSP=<%=sanphamC.getMaSP() %>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                                                 </div>
                                             </div>
@@ -168,9 +168,9 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <a href="product details.jsp?MaSP=<%=sanphamY.getMaSP() %>"><img src="<%=sanphamY.getHinhAnh() %>" alt="" /></a>
+                                                    <a href="product_details.jsp?MaSP=<%=sanphamY.getMaSP() %>"><img src="<%=sanphamY.getHinhAnh() %>" alt="" /></a>
                                                     <h2><%=currencyVN.format(sanphamY.getGia())%></h2>
-                                                    <a href="product details.jsp?MaSP=<%=sanphamY.getMaSP() %>"><p><%=sanphamY.getTenSP() %></p></a>
+                                                    <a href="product_details.jsp?MaSP=<%=sanphamY.getMaSP() %>"><p><%=sanphamY.getTenSP() %></p></a>
                                                     <a href="GioHangServlet?command=themIDX&MaSP=<%=sanphamY.getMaSP() %>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                                                 </div>
                                             </div>
@@ -192,9 +192,9 @@
                                             <div class="product-image-wrapper">
                                                 <div class="single-products">
                                                     <div class="productinfo text-center">
-                                                        <a href="product details.jsp?MaSP=<%=sanphamRand.getMaSP() %>"><img src="<%=sanphamRand.getHinhAnh() %>" alt="" /></a>
+                                                        <a href="product_details.jsp?MaSP=<%=sanphamRand.getMaSP() %>"><img src="<%=sanphamRand.getHinhAnh() %>" alt="" /></a>
                                                         <h2><%=currencyVN.format(sanphamRand.getGia())%></h2>
-                                                        <a href="product details.jsp?MaSP=<%=sanphamRand.getMaSP() %>"><p><%=sanphamRand.getTenSP() %></p></a>
+                                                        <a href="product_details.jsp?MaSP=<%=sanphamRand.getMaSP() %>"><p><%=sanphamRand.getTenSP() %></p></a>
                                                         <a href="GioHangServlet?command=themIDX&MaSP=<%=sanphamRand.getMaSP() %>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                                                     </div>
                                                 </div>
@@ -208,9 +208,9 @@
                                             <div class="product-image-wrapper">
                                                 <div class="single-products">
                                                     <div class="productinfo text-center">
-                                                        <a href="product details.jsp?MaSP=<%=sanphamRand.getMaSP() %>"><img src="<%=sanphamRand.getHinhAnh() %>" alt="" /></a>
+                                                        <a href="product_details.jsp?MaSP=<%=sanphamRand.getMaSP() %>"><img src="<%=sanphamRand.getHinhAnh() %>" alt="" /></a>
                                                         <h2><%=currencyVN.format(sanphamRand.getGia())%></h2>                                                    
-                                                        <a href="product details.jsp?MaSP=<%=sanphamRand.getMaSP() %>"><p><%=sanphamRand.getTenSP() %></p></a>
+                                                        <a href="product_details.jsp?MaSP=<%=sanphamRand.getMaSP() %>"><p><%=sanphamRand.getTenSP() %></p></a>
                                                         <a href="GioHangServlet?command=themIDX&MaSP=<%=sanphamRand.getMaSP() %>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                                                     </div>
                                                 </div>

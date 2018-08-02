@@ -103,7 +103,7 @@ public class NhanVienDAO {
     //Lay danh sach nhan vien dua vao quyen
     public ArrayList<NhanVien> listNhanVienByQuyen(String quyen){
         Connection conn = DBConnect.getConnection();
-        String sql = "SELECT * FROM nhanvien WHERE Quyen = '"+quyen+"'";
+        String sql = "SELECT * FROM nhanvien WHERE Quyen = '"+quyen+"' AND TrangThai = '0'";
         ArrayList<NhanVien> list = new ArrayList<>();
         try {
             PreparedStatement ps = conn.prepareCall(sql);
@@ -245,7 +245,7 @@ public class NhanVienDAO {
     //Kiem tra dang nhap
     public NhanVien KiemTraDangNhapNhanVien(String username, String password){
         Connection conn = DBConnect.getConnection();
-        String sql = "SELECT * FROM nhanvien WHERE Uswename = '"+username+"' AND Password = '"+password+"' And TrangThai = '0'";
+        String sql = "SELECT * FROM nhanvien WHERE Username = '"+username+"' AND Password = '"+password+"' AND TrangThai = '0'";
         NhanVien nhanvien = new NhanVien();
         try {
             PreparedStatement ps = conn.prepareCall(sql);
@@ -258,7 +258,7 @@ public class NhanVienDAO {
                 nhanvien.setHoTen(rs.getString("HoTen"));
                 nhanvien.setSDT(rs.getString("SDT"));
                 nhanvien.setQuyen(rs.getString("Quyen"));
-                nhanvien.setTrangThai(rs.getInt("TranThai"));
+                nhanvien.setTrangThai(rs.getInt("TrangThai"));
                 
                 return nhanvien;
             }
@@ -267,5 +267,23 @@ public class NhanVienDAO {
             
         }
         return null;
+    }
+    
+    public int tongNhanVien(){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT COUNT(MaNV) FROM nhanvien";
+        int count = 0;
+        
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                count = rs.getInt(1);
+            }  
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
     }
 }

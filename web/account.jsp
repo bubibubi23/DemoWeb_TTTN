@@ -89,7 +89,7 @@
 
                                                                     </em>
                                                                 </td>
-                                                                <td class="a-center last"><span class="nobr"> <a href="/account/orders/3558834">Xem chi tiết</a></span></td>
+                                                                <td class="a-center last"><span class="nobr"> <a href="order_details.jsp?MaDH=<%=donhang.getMaDH() %>">Xem chi tiết</a></span></td>
                                                             </tr>
                                                             <%}%>
                                                         </tbody>

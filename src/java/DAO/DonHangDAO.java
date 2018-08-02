@@ -82,6 +82,37 @@ public class DonHangDAO {
         }
         return list;    
     }
+    //Danh sach don hang theo MaNV
+    public ArrayList<DonHang> listDonHangByMaNV(String MaNV){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT * FROM donhang WHERE MaNV = '"+MaNV+"'";
+        ArrayList<DonHang> list = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                DonHang donhang = new DonHang();
+                
+                donhang.setMaDH(rs.getInt("MaDH"));
+                donhang.setMaKH(rs.getInt("MaKH"));
+                donhang.setMaNV(rs.getString("MaNV"));
+                donhang.setNgayTao(rs.getDate("NgayTao"));
+                donhang.setNgayChuyenHang(rs.getDate("NgayChuyenHang"));
+                donhang.setPhuongThucThanhToan(rs.getString("PhuongThucThanhToan"));
+                donhang.setDiaChi(rs.getString("DiaChi"));
+                donhang.setSDT(rs.getString("SDT"));
+                donhang.setTrangThai(rs.getString("TrangThai"));
+                donhang.setHoTen(rs.getString("HoTen"));
+                donhang.setTongTien(rs.getInt("TongTien"));
+                
+                list.add(donhang);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DonHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;    
+    }
     //Lay thong tin don hang
     public DonHang getDonHang(int maDH){
         Connection conn = DBConnect.getConnection();
@@ -195,5 +226,23 @@ public class DonHangDAO {
             return false;
         }  
     }
+    
+    public int tongDonHang(){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT COUNT(MaDH) FROM donhang";
+        int count = 0;
+        
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                count = rs.getInt(1);
+            }    
+        } catch (SQLException ex) {
+            Logger.getLogger(DonHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    } 
     
 }

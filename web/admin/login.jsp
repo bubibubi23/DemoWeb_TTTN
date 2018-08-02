@@ -1,17 +1,16 @@
 <%-- 
-    Document   : menu_sidebar
-    Created on : Jul 17, 2018, 3:46:02 PM
+    Document   : login
+    Created on : Jul 27, 2018, 7:05:32 PM
     Author     : Acer_Aspire
 --%>
-<%@page import="Model.NhanVien"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>menu_sidebar</title>
-        
+        <title>Login</title>
+
         <c:set var="root" value="${pageContext.request.contextPath}"/>
         <!-- Fontfaces CSS-->
         <link href="${root}/css/font-face.css" rel="stylesheet" media="all">
@@ -34,62 +33,46 @@
         <!-- Main CSS-->
         <link href="${root}/css/theme.css" rel="stylesheet" media="all">
     </head>
-    <body>
-        <%
-            NhanVien nhanvien = (NhanVien) session.getAttribute("nhanvien");
-            if(nhanvien == null){
-                nhanvien = new NhanVien();
-                session.setAttribute("nhanvien", nhanvien);
-            }
-        %>
-        <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <a href="${root}/admin/index.jsp">
-                    <img src="${root}/images/icon/logo.png" alt="Cool Admin" />
-                </a>
+    <body class="animsition">
+        <div class="page-wrapper">
+            <div class="page-content--bge5">
+                <div class="container">
+                    <div class="login-wrap">
+                        <div class="login-content">
+                            <div class="login-logo">
+                                <a href="#">
+                                    <img src="${root}/images/icon/logo.png" alt="CoolAdmin">
+                                </a>
+                            </div>
+                            <div class="login-form">
+                                <form action="${root}/NhanVienDangNhapServlet" method="post">
+                                    <div class="form-group">
+                                        <label>Tên Đăng Nhập</label>
+                                        <input class="au-input au-input--full" type="text" name="Username" placeholder="Tên đăng nhập">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mật Khẩu</label>
+                                        <input class="au-input au-input--full" type="password" name="Pass" placeholder="Mật khẩu">
+                                    </div>
+                                    <div class="login-checkbox">
+                                        <label>
+                                            <input type="checkbox" name="remember">Remember Me
+                                        </label>
+                                        <label>
+                                            <a href="#">Forgotten Password?</a>
+                                        </label>
+                                    </div>
+                                    <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Sign in</button>
+                                    
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="menu-sidebar__content js-scrollbar1">
-                <nav class="navbar-sidebar">
-                    <ul class="list-unstyled navbar__list">
-                        <%if(nhanvien.getQuyen().equals("Admin")) {%>
-                        <li>
-                            <a href="${root}/admin/manager_users.jsp">
-                                <i class="fas fa-star"></i>Quản lý khách hàng
-                            </a>                                                          
-                        </li>
-                        <li>
-                            <a href="${root}/admin/manager_employees.jsp">
-                                <i class="fas fa-star"></i>Quản lý nhân viên
-                            </a>
-                        </li>
-                        <li>
-                            <a href="${root}/admin/manager_shippers.jsp">
-                                <i class="fas fa-star"></i>Quản lý nhân viên giao hàng
-                            </a>
-                        </li>
-                        <%}%>
-                        <%if(nhanvien.getQuyen().equals("Admin") || nhanvien.getQuyen().equals("Nhân viên bán hàng")) {%>
-                        <li>
-                            <a href="${root}/admin/manager_products.jsp">
-                                <i class="fas fa-star"></i>Quản lý sản phẩm
-                            </a>
-                        </li>
-                        <li>
-                            <a href="${root}/QuanLyDonHangServlet?command=showAll">
-                                <i class="fas fa-star"></i>Quản lý đơn hàng
-                            </a>
-                        </li>
-                        <%}%>
-                        <%if(nhanvien.getQuyen().equals("Admin") || nhanvien.getQuyen().equals("Nhân viên kho")) {%>
-                        
-                        <%}%>
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-        <!-- END MENU SIDEBAR-->
-        
+
+        </div>
         <!-- Jquery JS-->
         <script src="${root}/vendor/jquery-3.2.1.min.js"></script>
         <!-- Bootstrap JS-->

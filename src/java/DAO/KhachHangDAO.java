@@ -179,5 +179,23 @@ public class KhachHangDAO {
         return false;
     }
     
+    public int tongKhachHang(){
+        Connection conn = DBConnect.getConnection();
+        String sql = "SELECT COUNT(MaKH) FROM khachhang";
+        int count = 0;
+        
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(KhachHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+    
     
 }

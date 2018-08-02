@@ -3,6 +3,13 @@
     Created on : Jul 17, 2018, 3:50:10 PM
     Author     : Acer_Aspire
 --%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.util.Locale"%>
+<%@page import="Model.DonHang"%>
+<%@page import="DAO.SanPhamDAO"%>
+<%@page import="DAO.DonHangDAO"%>
+<%@page import="DAO.NhanVienDAO"%>
+<%@page import="DAO.KhachHangDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,6 +41,23 @@
         <link href="${root}/css/theme.css" rel="stylesheet" media="all">
     </head>
     <body class="animsition">
+        <%
+            Locale localeVN = new Locale("vi", "VN");
+            NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+            
+            KhachHangDAO khachhangDAO = new KhachHangDAO();
+            NhanVienDAO nhanvienDAO = new NhanVienDAO();
+            DonHangDAO donhangDAO = new DonHangDAO();
+            SanPhamDAO sanphamDAO = new SanPhamDAO();
+            
+            int tongKhachHang = khachhangDAO.tongKhachHang();
+            int tongNhanVien = nhanvienDAO.tongNhanVien();
+            int tongDonHang = donhangDAO.tongDonHang();
+            int tongTien = 0;
+            for(DonHang donhang : donhangDAO.listDonHangByTrangThai("Đã thanh toán")) {
+                tongTien  += donhang.getTongTien();
+            }
+        %>
         <div class="page-wrapper">
         <!-- MAIN CONTENT-->
             <div class="main-content">
@@ -42,9 +66,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-1">overview</h2>
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
+                                    <h2 class="title-1">Tổng quan</h2>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -57,8 +80,8 @@
                                                 <i class="zmdi zmdi-account-o"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>10368</h2>
-                                                <span>members online</span>
+                                                <h2><%=tongKhachHang%></h2>
+                                                <span>Thành Viên</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
@@ -75,8 +98,8 @@
                                                 <i class="zmdi zmdi-shopping-cart"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>388,688</h2>
-                                                <span>items solid</span>
+                                                <h2><%=tongNhanVien %></h2>
+                                                <span>Nhân Viên</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
@@ -93,8 +116,8 @@
                                                 <i class="zmdi zmdi-calendar-note"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>1,086,054</h2>
-                                                <span>this week</span>
+                                                <h2><%=tongDonHang %></h2>
+                                                <span>Đơn Hàng</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
@@ -111,8 +134,8 @@
                                                 <i class="zmdi zmdi-money"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>$1,060,386</h2>
-                                                <span>total earnings</span>
+                                                <h2><%=currencyVN.format(tongTien)%></h2>
+                                                <span>Doanh Thu</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
